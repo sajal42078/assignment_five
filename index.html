@@ -7,6 +7,7 @@
      <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
 <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
+
 <link rel="stylesheet" href="style.css">
 
     <title>Document</title>
@@ -16,7 +17,7 @@
 <body>
    
     <!-- login form  -->
-     <section class="login_form w-1/3 mx-auto my-10">
+     <section id="login_page" class="login_form w-1/3 mx-auto my-10">
 
       <fieldset class="fieldset bg-base-200 border-base-300 rounded-box border p-8">
          <div class="flex flex-col justify-center items-center mb-3">
@@ -27,21 +28,194 @@
 
       <div class="my-3">
         <label class="label font-semibold">Username</label>
-  <input type="text" class="input w-full" placeholder="Enter Username" />
+  <input id="username" type="text" class="input w-full" placeholder="Enter Username" />
   <p class="text-[#4A00FF]">Default: admin</p>
       </div>
   
       <div>
         <label class="label font-semibold">Password</label>
-  <input type="password" class="input w-full" placeholder="Enter Password" />
+  <input id="password" type="password" class="input w-full" placeholder="Enter Password" />
   <p class="text-[#4A00FF]">Default: admin123</p>
 
       </div>
   
-  <button class="btn bg-[#4A00FF] text-white btn-neutral mt-4">Sign In</button>
+  <button id="signin-btn" class="btn bg-[#4A00FF] text-white btn-neutral mt-4">Sign In</button>
 </fieldset>
      </section>
 
+     <section id="dashbord" class=" //hidden"> 
+
+      <div id="navbar" class="flex w-full justify-between items-center px-20 py-3 shadow-md mb-10">
+
+        <div class="flex items-center gap-2">
+          <img class="w-9" src="assets/github-logo.png" alt="">
+          <h2 class="font-semibold text-xl">GitHub Issues Tracker</h2>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <label class="input">
+         <svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+           <g
+           stroke-linejoin="round"
+            stroke-linecap="round"
+            stroke-width="2.5"
+            fill="none"
+            stroke="currentColor"
+    >
+            <circle cx="11" cy="11" r="8"></circle>
+            <path d="m21 21-4.3-4.3"></path>
+            </g>
+            </svg>
+              <input type="Search issues..." required placeholder="Search" />
+              </label>
+              <button class="btn bg-[#1A77F2] text-white border-[#005fd8]">search</button>
+        </div>
+      </div>
+
+      <div id="pages-btn" class="flex justify-start ml-50 mr-50 mb-7 shadow-lg gap-2 mb-1">
+        <div class="p-2">
+          <button class="btn border-gray-400">All</button>
+        <button class="btn border-gray-400">Open</button>
+        <button class="btn border-gray-400">Close</button>
+        </div>
+      </div>
+
+      <div id="issues-counter" class="flex justify-between ml-50 mr-50 mb-1 shadow-lg">
+        <div class="flex items-center gap-1">
+          <div>
+            <img src="assets/Aperture.png" alt="">
+          </div>
+          <div>
+            <h2 class="font-semibold text-[20px]">50 Issues</h2>
+            <p>Track and manage your project issues</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-1">
+          <img class="h-3" src="assets/Open-Status.png" alt="">
+          <p>open</p>
+          <img class="h-3" src="assets/Closed- Status .png" alt="">
+          <p>closed</p>
+        </div>
+      </div>
+
+      </section>
+
+      <section id="cards" class="flex justify-between ml-50 mr-50 mb-1 shadow-lg grid grid-cols-4 gap-3 p-6">
+        <div id="card" class="shadow-md p-4 border-t-2 border-[#00A96E] rounded-md">
+          <div class="flex items-center justify-between">
+            <img src="assets/Open-Status.png" alt="">
+            <div>
+                 <h6 class="bg-[#FEECEC] text-[#EF4444]  border rounded-full px-2">HIGH</h6>
+            </div>
+         
+          </div>
+          <div>
+            <h2 class="font-semibold">
+              Fix navigation menu on mobile devices
+            </h2>
+            <p>
+              The navigation menu doesn't collapse properly on mobile devices...
+            </p>
+          </div>
+          <div>
+            <div class="flex justify-between">
+              <h6 class="bg-[#FECACA] text-[#EF4444]  border rounded-full px-2">Bug</h6>
+            <h6 class="bg-[#FDE68A] text-[#D97706]  border rounded-full px-2">help wanted</h6>
+          </div>
+          </div>
+          <div>
+            <p>
+              #1by john_doe
+            </p>
+            <p>1/15/2024</p>
+          </div>
+        </div>
+        <div id="card" class="shadow-md p-4">
+          <div class="flex items-center justify-between">
+            <img src="assets/Open-Status.png" alt="">
+            <p>HIGH</p>
+          </div>
+          <div>
+            <h2 class="font-semibold">
+              Fix navigation menu on mobile devices
+            </h2>
+            <p>
+              The navigation menu doesn't collapse properly on mobile devices...
+            </p>
+          </div>
+          <div>
+            <div class="flex justify-between">
+              <h6 class="bg-[#FECACA] text-[#EF4444]">Bug</h6>
+            <h6 class="bg-[#FDE68A] text-[#D97706]">help wanted</h6>
+          </div>
+          </div>
+          <div>
+            <p>
+              #1by john_doe
+            </p>
+            <p>1/15/2024</p>
+          </div>
+        </div>
+        <div id="card" class="shadow-md p-4">
+          <div class="flex items-center justify-between">
+            <img src="assets/Open-Status.png" alt="">
+            <p>HIGH</p>
+          </div>
+          <div>
+            <h2 class="font-semibold">
+              Fix navigation menu on mobile devices
+            </h2>
+            <p>
+              The navigation menu doesn't collapse properly on mobile devices...
+            </p>
+          </div>
+          <div>
+            <div class="flex justify-between">
+              <h6 class="bg-[#FECACA] text-[#EF4444]">Bug</h6>
+            <h6 class="bg-[#FDE68A] text-[#D97706]">help wanted</h6>
+          </div>
+          </div>
+          <div>
+            <p>
+              #1by john_doe
+            </p>
+            <p>1/15/2024</p>
+          </div>
+        </div>
+        <div id="card" class="shadow-md p-4">
+          <div class="flex items-center justify-between">
+            <img src="assets/Open-Status.png" alt="">
+            <p>HIGH</p>
+          </div>
+          <div>
+            <h2 class="font-semibold">
+              Fix navigation menu on mobile devices
+            </h2>
+            <p>
+              The navigation menu doesn't collapse properly on mobile devices...
+            </p>
+          </div>
+          <div>
+            <div class="flex justify-between">
+              <h6 class="bg-[#FECACA] text-[#EF4444]">Bug</h6>
+            <h6 class="bg-[#FDE68A] text-[#D97706]">help wanted</h6>
+          </div>
+          </div>
+          <div>
+            <p>
+              #1by john_doe
+            </p>
+            <p>1/15/2024</p>
+          </div>
+        </div>
+
+        <div></div>
+
+      </section>
   
 </body>
+
+
+<script src="script.js"></script>
+
 </html>
