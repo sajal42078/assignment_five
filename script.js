@@ -1,10 +1,26 @@
 const createlemnts = (arr) =>{
-    const htmlelements = arr.map((el) => `<span class="bg-[#FECACA] text-[#EF4444]  border rounded-full gap-x-0.5 p-1">${el}</span>` );
+    const htmlelements = arr.map((el) =>{
+
+        let val ="";
+        
+        if(el === "bug" ){
+          val =  `<span class="bg-[#FECACA] text-[#EF4444]  
+    border rounded-full gap-x-0.5 p-0.5">${el}</span>`
+        }
+        else if(el === "help wanted"){
+            val =    `<span class ="bg-[#FFF8DB] text-[#D97706]
+              border rounded-full gap-x-0.5 p-0.5">${el}</span>`
+          
+        }
+        else{
+         val =  `<span class ="bg-[#DEFCE8] text-[#00A96E] border rounded-full gap-x-0.5 p-0.5">${el}</span>`
+        }
+        return val;
+         });
+
     return htmlelements.join(" ");
 
 };
-
-
 
 // console.log('hello from js')
 document.getElementById("signin-btn").addEventListener("click", ()=>{
@@ -16,25 +32,19 @@ document.getElementById("signin-btn").addEventListener("click", ()=>{
         document.getElementById("dashbord").classList.remove("hidden");
     }
 })
+ let alldata = [];
 
-let alldata = [];
-
-
-// all- issues 
-function all_issues(){
-    const cards_container = document.getElementById("cards");
-    
-
+function dataArray(){
+ 
     const url= "https://phi-lab-server.vercel.app/api/v1/lab/issues"
-  fetch(url)
+    fetch(url)
   .then(res=>res.json())
   .then((result) =>{
     alldata = result.data;
-    showcards(alldata);
-
     //  console.log(data.data)
   }
    );
+
 }
 
 function showcards(arr){
@@ -43,17 +53,26 @@ function showcards(arr){
     arr.forEach(element => {
         displayAllCards(element);
     });
+    issuesCount(arr);
 };
 
+let cards_number = [];
+
+// all- issues 
+function all_issues(){
+    // const cards_container = document.getElementById("cards");
+    cards_number = [...alldata];
+     showcards(alldata);
+}
 
 function openIssues(){
-    const opendata = alldata.filter(item => item.status === "open");
-    showcards(opendata);
+    cards_number = alldata.filter(item => item.status === "open");
+    showcards(cards_number);
 };
 
 function closedIssues(){
-    const closedData = alldata.filter(item => item.status === "closed");
-    showcards(closedData);
+    cards_number = alldata.filter(item => item.status === "closed");
+    showcards(cards_number);
 };
 
 //  [
@@ -73,6 +92,9 @@ function closedIssues(){
 // "updatedAt": "2024-01-15T10:30:00Z"
 
 
+// priority section
+
+
 // display all issues as cards 
 
 displayAllCards=(data)=>{
@@ -82,11 +104,40 @@ displayAllCards=(data)=>{
     const card = document.createElement("div");
     card.className = "shadow-md p-4 border-t-2 border-[#00A96E] rounded-md ";
 
+    let img ="";
+    if(data.status === "open"){
+        img =`
+        <img src="assets/Open-Status.png" alt="">
+        `
+    }
+    else{
+        img = ` <img src="assets/Closed- Status .png" alt="">`
+    }
+
+    let prioritySection ="";
+      if(data.priority === "high"){
+        prioritySection =`
+            <h6 class="bg-[#FEECEC] text-[#EF4444]  border rounded-full px-2">${data.priority}</h6>
+            `
+      }
+      else if(data.priority === "medium"){
+        prioritySection=`
+        <h6 class="bg-[#FFF6D1] text-[#F59E0B] border rounded-full px-2">${data.priority}</h6>
+        `
+      }
+    else
+    {
+        prioritySection=`
+         <h6 class="bg-[#EEEFF2] text-[#9CA3AF] border rounded-full px-2">${data.priority}</h6>
+        `
+    }
+
+    
     card.innerHTML=`
           <div class="flex items-center justify-between">
-            <img src="assets/Open-Status.png" alt="">
+            ${img}
             <div>
-                 <h6 class="bg-[#FEECEC] text-[#EF4444]  border rounded-full px-2">${data.priority}</h6>
+            ${prioritySection}
             </div>
          
           </div>
@@ -112,3 +163,30 @@ displayAllCards=(data)=>{
     cards_container.appendChild(card);
 }
 
+function issuesCount(arr){
+
+const noOfcard = document.getElementById("issues-counter")
+noOfcard.innerHTML=`
+
+<div class="flex items-center gap-1">
+          <div>
+            <img src="assets/Aperture.png" alt="">
+          </div>
+          <div>
+            <div id="no-of-issues">
+               <h2 class="font-semibold text-[20px]">${cards_number.length} Issues</h2>
+            </div>
+            <p>Track and manage your project issues</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-1">
+          <img class="h-3" src="assets/Open-Status.png" alt="">
+          <p>open</p>
+          <img class="h-3" src="assets/Closed- Status .png" alt="">
+          <p>closed</p>
+        </div>
+
+`;
+}
+
+dataArray();
