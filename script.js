@@ -63,16 +63,19 @@ function all_issues(){
     // const cards_container = document.getElementById("cards");
     cards_number = [...alldata];
      showcards(alldata);
+     active_btn("all");
 }
 
 function openIssues(){
     cards_number = alldata.filter(item => item.status === "open");
     showcards(cards_number);
+    active_btn("open")
 };
 
 function closedIssues(){
     cards_number = alldata.filter(item => item.status === "closed");
     showcards(cards_number);
+    active_btn("closed");
 };
 
 //  [
@@ -190,3 +193,11 @@ noOfcard.innerHTML=`
 }
 
 dataArray();
+
+function active_btn(active_id){
+    const btns =["all", "open", "closed"];
+    btns.forEach(element => {
+        document.getElementById(element).classList.remove( "bg-[#4A00FF]" , "text-white" );
+    });
+    document.getElementById(active_id).classList.add("bg-[#4A00FF]" , "text-white")
+}
