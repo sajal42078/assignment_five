@@ -22,6 +22,15 @@ const createlemnts = (arr) =>{
 
 };
 
+
+function active_btn(active_id){
+    const btns =["all", "open", "closed", "searchbtn"];
+    btns.forEach(element => {
+        document.getElementById(element).classList.remove( "bg-[#4A00FF]" , "text-white" );
+    });
+    document.getElementById(active_id).classList.add("bg-[#4A00FF]" , "text-white")
+}
+
 // console.log('hello from js')
 document.getElementById("signin-btn").addEventListener("click", ()=>{
     const username = document.getElementById("username").value;
@@ -78,6 +87,35 @@ function closedIssues(){
     active_btn("closed");
 };
 
+function search(){
+    const searchitem = document.getElementById("search_item").value;
+
+    cards_number = alldata.filter(item => item.title.toLowerCase().includes(searchitem.toLowerCase() ));
+
+    showcards(cards_number);
+    active_btn("searchbtn")
+    
+}
+
+// searching data 
+let searchdata=[];
+
+function searchArray(){
+
+    const url= "https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=notifications"
+    fetch(url)
+  .then(res=>res.json())
+  .then((result) =>{
+    searchdata = result.data;
+    //  console.log(data.data)
+  }
+   );
+
+}
+
+
+
+
 //  [
 // {
 // "id": 1,
@@ -94,7 +132,6 @@ function closedIssues(){
 // "createdAt": "2024-01-15T10:30:00Z",
 // "updatedAt": "2024-01-15T10:30:00Z"
 
-
 // priority section
 
 
@@ -105,14 +142,17 @@ displayAllCards=(data)=>{
     // cards_container.innerHTML ="";
 
     const card = document.createElement("div");
-    card.className = "shadow-md p-4 border-t-2 border-[#00A96E] rounded-md ";
+   
 
     let img ="";
+    let st=" border-[#A855F7]";
     if(data.status === "open"){
         img =`
         <img src="assets/Open-Status.png" alt="">
         `
+        st = `border-[#00A96E]`;
     }
+
     else{
         img = ` <img src="assets/Closed- Status .png" alt="">`
     }
@@ -134,7 +174,7 @@ displayAllCards=(data)=>{
          <h6 class="bg-[#EEEFF2] text-[#9CA3AF] border rounded-full px-2">${data.priority}</h6>
         `
     }
-
+ card.className =`shadow-md border-t-2 p-4 rounded-md space-y-3  ${st} `  ;
     
     card.innerHTML=`
           <div class="flex items-center justify-between">
@@ -194,10 +234,4 @@ noOfcard.innerHTML=`
 
 dataArray();
 
-function active_btn(active_id){
-    const btns =["all", "open", "closed"];
-    btns.forEach(element => {
-        document.getElementById(element).classList.remove( "bg-[#4A00FF]" , "text-white" );
-    });
-    document.getElementById(active_id).classList.add("bg-[#4A00FF]" , "text-white")
-}
+searchArray()
