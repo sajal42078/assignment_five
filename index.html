@@ -45,7 +45,7 @@
 
      <section id="dashbord" class="hidden"> 
 
-      <div id="navbar" class="flex w-full justify-between items-center px-20 py-3 shadow-md mb-10">
+      <div id="navbar" class="flex md:flex-row items-center px-3 md:px-10 lg:px-20 py-3 shadow-md mb-10 w-full justify-between">
 
         <div class="flex items-center gap-2">
           <img class="w-9" src="assets/github-logo.png" alt="">
@@ -73,7 +73,7 @@
         </div>
       </div>
 
-      <div id="pages-btn" class="flex justify-start ml-50 mr-50 mb-7 shadow-lg gap-2 mb-1">
+      <div id="pages-btn" class="mx-4 md:mx-10 lg:mx-20 mb-4 shadow-lg">
         <div class="p-2">
           <button id="all" onclick="all_issues()" class="btn border-gray-400">All</button>
         <button id="open" onclick="openIssues()" class="btn border-gray-400">Open</button>
@@ -81,18 +81,26 @@
         </div>
       </div>
 
-      <div id="issues-counter" class="flex justify-between ml-50 mr-50 mb-1 shadow-lg">
+      <div id="issues-counter" class="flex flex-col md:flex-row gap-4 md:gap-0 justify-between mx-4 md:mx-10 lg:mx-20 mb-3 shadow-lg p-4">
         
       </div>
 
       </section>
       <section id="cards_container">
-         <section id="cards" class=" ml-50 mr-50 mb-20 shadow-lg grid grid-cols-4 gap-3 p-6">
+         <section id="cards" class="mx-3 md:mx-10 lg:mx-20 mb-20 shadow-lg grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 p-6">
 
           </section>
       </section>
      
-  
+
+      <!-- Open the modal using ID.showModal() method -->
+<dialog id="my_modal_1" class="modal">
+  <div id="modal_container" class="modal-box">
+   
+    </div>
+</dialog>
+
+
 </body>
 
 

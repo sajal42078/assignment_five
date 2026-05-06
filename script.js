@@ -113,28 +113,6 @@ function searchArray(){
 
 }
 
-
-
-
-//  [
-// {
-// "id": 1,
-// "title": "Fix navigation menu on mobile devices",
-// "description": "The navigation menu doesn't collapse properly on mobile devices. Need to fix the responsive behavior.",
-// "status": "open",
-// "labels": [
-// "bug",
-// "help wanted"
-// ],
-// "priority": "high",
-// "author": "john_doe",
-// "assignee": "jane_smith",
-// "createdAt": "2024-01-15T10:30:00Z",
-// "updatedAt": "2024-01-15T10:30:00Z"
-
-// priority section
-
-
 // display all issues as cards 
 
 displayAllCards=(data)=>{
@@ -175,6 +153,10 @@ displayAllCards=(data)=>{
         `
     }
  card.className =`shadow-md border-t-2 p-4 rounded-md space-y-3  ${st} `  ;
+ card.addEventListener("click", function(){
+    singleissues(data.id);
+ }
+);
     
     card.innerHTML=`
           <div class="flex items-center justify-between">
@@ -231,6 +213,56 @@ noOfcard.innerHTML=`
 
 `;
 }
+
+function singleissues(id){
+    const url =`https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`;
+    fetch(url)
+    .then(res => res.json())
+    .then(result => {
+        const data = result.data;
+        let colors =`<h2 class="p-0.5 bg-[#4A00FF]  text-white font-normal rounded-md">${data.status}</h2>`;
+        if(data.status === "open"){
+            colors = `<h2 class="p-0.5 bg-[#00A96E]  text-white font-normal rounded-md ">${data.status}</h2>`;
+        }
+
+        document.getElementById("modal_container").innerHTML = `
+        
+         <h3 class="text-lg font-bold">${data.title}</h3>
+    <div class="items-center mb-4 flex gap-3">
+      <p class="py-4">${colors}</p>
+    <p>Opened by Fahim Ahmed</p>
+    <p>22/02/2026</p>
+    </div>
+    <div class="mb-5">${createlemnts(data.labels)}</div>
+    <p class="">${data.description}</p>
+    <div class="flex gap-10 mt-5 shadow-sm bg-[#64748B]/5 mb-2 ">
+      <div>
+        <h1>Assignee:</h1>
+        <h2>Fahim Ahmed</h2>
+      </div>
+
+      <div>
+        <h1>Priority:</h1>
+        <div class="bg-[#EF4444] text-white flex justify-center items-center px-3 py-1 rounded-sm">
+        <h2>${data.priority}</h2>
+        </div>
+      </div>
+
+    </div>
+    <div class="flex justify-end">
+       <form  method="dialog">
+        <!-- if there is a button in form, it will close the modal -->
+        <button class="btn bg-[#4A00FF] text-white btn-neutral ">Close</button>
+      </form>
+      </div>
+        
+        `;
+        document.getElementById("my_modal_1").showModal();
+
+    })
+
+}
+
 
 dataArray();
 
