@@ -22,7 +22,7 @@ Example ,
           const add = (a,b) => a + b ;
 is an array function that returns the sum of two numbers.
 
-5️⃣ What are template literals?
+### 5️⃣ What are template literals?
 
 answer : Template iterals are a modern JavaScript way to create strings using backticks(` `) instead of quotes.They allow you to 
 insert variables using ${} and support multiline strings. 
